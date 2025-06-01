@@ -47,6 +47,7 @@ The repository is organized to provide clarity and ease of access to different c
 ```
 Hallucination-Package-Research/
 ├── n8n-workflows/                # Contains n8n workflow JSON files
+│   ├── agent.json
 │   ├── detection_module.json
 │   ├── preemption_module.json
 │   └── warning_module.json
