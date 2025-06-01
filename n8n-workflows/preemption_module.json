@@ -1,0 +1,269 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1SDAkh7qc6bjNGlKD3hJewynWB-8_7z0LnVHIKEepqZI",
+          "mode": "list",
+          "cachedResultName": "hallucination_name",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SDAkh7qc6bjNGlKD3hJewynWB-8_7z0LnVHIKEepqZI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "工作表1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SDAkh7qc6bjNGlKD3hJewynWB-8_7z0LnVHIKEepqZI/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -180,
+        -60
+      ],
+      "id": "de6e1399-43eb-444e-9896-7f7d4724897a",
+      "name": "npm Hallucinated Package Library",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "2RXwxX0dEViz4DAt",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "=ls /home/node/{{ $('lp').item.json.packagename }}/README.md /home/node/{{ $('lp').item.json.packagename }}/package.json  "
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        -40
+      ],
+      "id": "93259bbe-7eac-42a6-bc8c-b883f970eca7",
+      "name": "Check File Generation",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "=mkdir -p {{ $json.packagename }} && \\\n\necho '{\n  \"name\": \"{{ $json.packagename }}\",\n  \"version\": \"0.0.1-security\",\n  \"description\": \"security holding package\"\n}' > {{ $json.packagename }}/package.json\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        420,
+        -40
+      ],
+      "id": "b88d4b74-d476-4144-87c8-0c2f582d910c",
+      "name": "Generate package.json"
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "=cat << EOF > {{ $('lp').item.json.packagename }}/README.md\n#  {{ $('lp').item.json.packagename }}- Benign Security Placeholder\n\n**IMPORTANT NOTICE: This is a Benign Security Placeholder Package**\n\nIf a Large Language Model (LLM), AI coding assistant, or code generation tool recommended this package, \\`${PACKAGE_NAME}\\`, to you, please be aware that this package name was likely \"hallucinated\" (i.e., invented by the LLM and did not exist in the public registry at the time of recommendation).\n\n---\n\n## Purpose of This Package\n\nThis package, {{ $('lp').item.json.packagename }}, has been registered by the Package Hallucination Research Group as a proactive security measure. Our system detected that this package name was hallucinated by a Large Language Model.\n\nThe sole purpose of registering this package is to **prevent malicious actors from exploiting this hallucinated package name to distribute harmful code or malware**. By occupying this name with a benign placeholder, we aim to mitigate a potential software supply chain attack vector.\n\n## What This Package Contains\n\nThis package is intentionally **non-functional and completely harmless**.\n*   It contains no executable code.\n*   It has no dependencies.\n*   It performs no actions.\n\nIt serves only as a placeholder to secure the name. Installing this package will have no adverse effects on your system, nor will it provide any utility.\n\n## Why Was This Package Registered?\n\nLarge Language Models, while powerful, sometimes generate code that refers to software packages that do not actually exist in official repositories like npm. Attackers can monitor these \"hallucinated\" package names and quickly register malicious software under these names, hoping developers will inadvertently install them based on the LLM's recommendation.\n\nOur project actively identifies such hallucinated package names and registers them with benign placeholders like this one. This is part of our ongoing research and effort to improve software supply chain security in the age of AI-driven development.\n\n## What Should You Do?\n\n*   **If an LLM recommended this package:** You likely do not need this package for your intended task. The LLM was mistaken. Please search for officially documented and existing packages that fulfill your requirements.\n*   **If you installed this by mistake:** It is safe and will not harm your system. You can safely uninstall it using your package manager (e.g., \\`npm uninstall {{ $('lp').item.json.packagename }} \\`, \\`pip uninstall {{ $('lp').item.json.packagename }}\\`).\n\n## Do You Genuinely Need This Package Name?\n\nIf you are a legitimate developer or project and believe you have a valid, non-malicious need for the package name \\`{{ $('lp').item.json.packagename }}\\`, please contact us. We are open to discussing the transfer of the package name under appropriate circumstances, provided it aligns with community best practices and security.\n\n\n---\n\n**Thank you for your understanding and for helping to keep the software supply chain secure!**\n\nEOF\n\n\n\n\n\n\n\n\n\n\n\n"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        760,
+        -40
+      ],
+      "id": "664261cf-af45-463f-8b49-767b80fbc117",
+      "name": "Generate Readme"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "upload"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -780,
+        -40
+      ],
+      "id": "08961765-a705-4827-95fb-fee408b16b34",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4802dbc7-1f07-4783-a12b-284319b49e7a",
+              "leftValue": "={{ $json.upload }}",
+              "rightValue": "upload",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -520,
+        -40
+      ],
+      "id": "6cb122e1-0440-4294-bb04-981df82f70ef",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"respond\": \"success\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1740,
+        -40
+      ],
+      "id": "2cc56c87-bf28-4689-bb7e-eb825ad03f92",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "command": "=echo \"//registry.npmjs.org/:_authToken=xx\" > ~/.npmrc && cd /home/node/{{ $('lp').item.json.packagename }} && npm publish"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        -40
+      ],
+      "id": "cd6895bb-a05f-4f58-8d04-b7f24f11635c",
+      "name": "Execute Command"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        80,
+        -60
+      ],
+      "id": "5aef430a-1225-411c-b126-5f2826e3c5b9",
+      "name": "lp",
+      "onError": "continueRegularOutput"
+    }
+  ],
+  "connections": {
+    "npm Hallucinated Package Library": {
+      "main": [
+        [
+          {
+            "node": "lp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check File Generation": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate package.json": {
+      "main": [
+        [
+          {
+            "node": "Generate Readme",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Readme": {
+      "main": [
+        [
+          {
+            "node": "Check File Generation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "npm Hallucinated Package Library",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "lp": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Generate package.json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "466ebbbb1418dfa66abd0881baa942da88c5140396d8aad9273efaf772cceb8b"
+  }
+}
