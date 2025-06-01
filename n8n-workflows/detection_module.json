@@ -1,0 +1,417 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=the specific content of the problem：{{ $json.question }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are a coding assistant that generates JavaScript code.\n\nProvide only the code and add additional explanatory text only when absolutely necessary(such as If you think  need to install xx package  to run your code, please give it in the form of \"npm install xx\" (xx can be multiple).).\n\nIf no code is required to answer the question, simply reply 'None'."
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        280,
+        -40
+      ],
+      "id": "80c76983-6bcf-4255-af35-641d23dcf1a0",
+      "name": "Basic LLM Chain",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0.7,
+          "timeout": 360000
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "typeVersion": 1,
+      "position": [
+        368,
+        180
+      ],
+      "id": "70a69d66-d2b4-44b5-afc6-932b49333f6b",
+      "name": "DeepSeek Chat Model",
+      "credentials": {
+        "deepSeekApi": {
+          "id": "OVYpWGvnZDB6lnt3",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"package\":\"{{ $json.packages[0] }}\",\n  \"url\": \"https://www.npmjs.com/package/{{$json.packages[0]}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1316,
+        -40
+      ],
+      "id": "2dd50acc-42c4-4008-8ff0-a11e339798d4",
+      "name": "Edit Fields",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0ebd6814-b47f-43ce-8300-d203e7690691",
+              "leftValue": "={{ $json.Body }}",
+              "rightValue": "npm install",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        656,
+        -40
+      ],
+      "id": "87da706b-113d-44a0-a16c-aae13ead1b73",
+      "name": "Filter",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7f55ae6f-c3a1-4157-a2fc-fa262c7d0fb7",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": "200",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1976,
+        -40
+      ],
+      "id": "c3694e29-83c7-4313-a19c-cf27ff785a42",
+      "name": "If",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1536,
+        -40
+      ],
+      "id": "5d440bdb-0832-4fc3-91fa-2b856e6f30ac",
+      "name": "HTTP Request",
+      "notesInFlow": false,
+      "retryOnFail": true,
+      "maxTries": 5,
+      "waitBetweenTries": 5000,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"packagename\":\"{{ $('Edit Fields').item.json.package }}\",\n   statusCode:\"{{ $json.statusCode }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1756,
+        -40
+      ],
+      "id": "9341e28f-4b02-4719-b178-b6788e7e6435",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "question"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        60,
+        -40
+      ],
+      "id": "9515fdfa-d68f-4e3d-b664-434c62142828",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1SDAkh7qc6bjNGlKD3hJewynWB-8_7z0LnVHIKEepqZI",
+          "mode": "list",
+          "cachedResultName": "hallucination_name",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SDAkh7qc6bjNGlKD3hJewynWB-8_7z0LnVHIKEepqZI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "工作表1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SDAkh7qc6bjNGlKD3hJewynWB-8_7z0LnVHIKEepqZI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "text": "={{ $('When Executed by Another Workflow').item.json.question }}",
+            "packagename": "={{ $('Edit Fields2').item.json.packagename }}"
+          },
+          "matchingColumns": [
+            "packagename"
+          ],
+          "schema": [
+            {
+              "id": "packagename",
+              "displayName": "packagename",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "upload",
+              "displayName": "upload",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "text",
+              "displayName": "text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2196,
+        -40
+      ],
+      "id": "5c022bcb-58c6-4352-b65e-9f6a61db2d66",
+      "name": "Google Sheets1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "2RXwxX0dEViz4DAt",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.all(); // 处理所有输入项\nconst output = inputData.map(item => {\n    const id = item.json.id;\n    const body = item.json.Body;\n    \n    // 改进的正则表达式，处理更多npm标志\n    // 先匹配npm install命令和所有可能的标志，然后捕获包名\n    const regex = /npm\\s+install\\s+(?:(?:-g|--global|--save(?:-dev|-optional)?|--no-save|-[gDSO]|--legacy-peer-deps|--ignore-scripts|--force|--production)(?:\\s+|$))*\\s*([@a-zA-Z0-9\\-_/.]+(?:@[a-zA-Z0-9\\-_.]+)?)/g;\n    \n    let npmInstalls = [];\n    \n    // 查找所有匹配项\n    let match;\n    while ((match = regex.exec(body)) !== null) {\n        // 获取包名\n        const packageName = match[1].trim();\n        // 确认这是一个有效的包名（避免误匹配）\n        if (isValidPackageName(packageName)) {\n            npmInstalls.push(`npm install ${packageName}`);\n        }\n    }\n    \n    return {\n        id: id,\n        npm_installs: npmInstalls\n    };\n});\n\n// 验证包名的辅助函数\nfunction isValidPackageName(name) {\n    // 基本验证：包名应该符合npm包命名规则\n    // 1. 可以以@开头(scoped包)\n    // 2. 可以包含字母、数字、连字符、下划线、点、斜杠(用于scoped包)\n    // 3. 可以包含一个@后跟版本号\n    // 4. 不应该是单独的标志选项\n    if (/^-/.test(name) && !/\\//.test(name)) {\n        // 拒绝以连字符开头的包名，除非是scoped包(包含斜杠)\n        return false;\n    }\n    return /^(@[a-zA-Z0-9\\-_]+\\/)?[a-zA-Z0-9\\-_.]+(@[a-zA-Z0-9\\-_.]+)?$/.test(name);\n}\n\nreturn output;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        876,
+        -40
+      ],
+      "id": "a155f93e-87d4-4c28-bdb7-f3fc4d857d00",
+      "name": "提取npm install"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.all(); // 获取所有输入数据\nconst output = inputData.map(item => {\n    const id = item.json.id;\n    const npmInstalls = item.json.npm_installs || []; // 确保 npm_installs 存在\n    \n    let packages = [];\n    \n    npmInstalls.forEach(command => {\n        // 首先移除所有 --save-dev 或 --save 等参数标志\n        let cleanCommand = command.replace(/\\s--(save-dev|save|dev|D|S)\\b/g, ' ');\n        \n        // 提取所有包名，支持多个包的情况\n        const parts = cleanCommand.split('npm install')[1]?.trim().split(/\\s+/) || [];\n        \n        parts.forEach(part => {\n            // 如果部分不为空且不是以 - 开头的参数\n            if (part && !part.startsWith('-')) {\n                // 提取包名（移除版本号）\n                const packageMatch = part.match(/^([^@\\s]+)(?:@[^\\s]+)?$/);\n                if (packageMatch) {\n                    packages.push(packageMatch[1]);\n                }\n            }\n        });\n    });\n    \n    return {\n        id: id,\n        packages: packages\n    };\n});\n\nreturn output;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1096,
+        -40
+      ],
+      "id": "2feff066-b470-46e0-bed4-9a7c2914d1fe",
+      "name": "Extract Package Name"
+    }
+  ],
+  "connections": {
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "提取npm install",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "提取npm install": {
+      "main": [
+        [
+          {
+            "node": "Extract Package Name",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Package Name": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "466ebbbb1418dfa66abd0881baa942da88c5140396d8aad9273efaf772cceb8b"
+  }
+}
