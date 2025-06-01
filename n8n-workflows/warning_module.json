@@ -1,0 +1,43 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "18_qWTqGmvKum2P2l3UZy9lA9zxqMhJA5dT2Drq-e9hc",
+          "mode": "list",
+          "cachedResultName": "web",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18_qWTqGmvKum2P2l3UZy9lA9zxqMhJA5dT2Drq-e9hc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18_qWTqGmvKum2P2l3UZy9lA9zxqMhJA5dT2Drq-e9hc/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        800,
+        280
+      ],
+      "id": "214f5deb-0e37-4261-8458-a0b7de27f7f2",
+      "name": "Google Sheets",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "2RXwxX0dEViz4DAt",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {},
+  "pinData": {},
+  "meta": {
+    "instanceId": "466ebbbb1418dfa66abd0881baa942da88c5140396d8aad9273efaf772cceb8b"
+  }
+}
