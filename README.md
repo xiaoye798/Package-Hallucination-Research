@@ -47,20 +47,20 @@ The repository is organized to provide clarity and ease of access to different c
 ```
 Hallucination-Package-Research/
 ├──.github/workflows/
-│   ├── sync_sheet.yml            # GitHub Action for Google Sheet data export and commit
+│   ├── sync_sheet.yml            # GitHub action for google sheet data export and commit
 ├──data/
-│   ├── data.csv                 # hallucinated package
-├── docs/                         # n8n workflow screenshot
+│   ├── data.csv                 # Hallucinated package list
+├── docs/                         # The n8n workflow screenshot
 │   ├── agent.png
 │   ├── preemption_module.png
 │   └── detection_module.png
-├── n8n-workflows/                # Contains n8n workflow JSON files
+├── n8n-workflows/                # Contains n8n workflow json files
 │   ├── agent.json
 │   ├── detection_module.json
 │   ├── preemption_module.json
 │   └── warning_module.json
-├── fetch_sheet_data.py        # Fetching Google Sheet data to CSV
-└── README.md                     # This file: project overview and main entry point
+├── fetch_sheet_data.py        # Fetching google sheet data to csv
+└── README.md                     # Project overview
 ```
 
 *   **`data/data.csv`**: The hallucinated package list updated once an hour.
