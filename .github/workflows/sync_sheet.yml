@@ -43,11 +43,11 @@ jobs:
     - name: Commit and push if changes exist
       run: |
       
-        if [ ! -f "data/your_data.csv" ]; then
-          echo "Error: data/your_data.csv was not created by the Python script."
+        if [ ! -f "data/data.csv" ]; then
+          echo "Error: data/data.csv was not created by the Python script."
           exit 1
         fi
-        git add data/your_data.csv 
+        git add data/data.csv 
         if ! git diff-index --quiet HEAD; then
           git commit -m "Update data from Google Sheet (API) [skip ci]"
           git push
