@@ -9,7 +9,7 @@ def main():
     creds_json_str = os.environ.get('GOOGLE_SHEETS_API_CREDENTIALS')
     spreadsheet_id = os.environ.get('GOOGLE_SHEET_ID')
     sheet_name = os.environ.get('GOOGLE_SHEET_NAME', 'Sheet1') 
-    output_csv_path = os.environ.get('OUTPUT_CSV_PATH', 'data/your_data.csv') 
+    output_csv_path = os.environ.get('OUTPUT_CSV_PATH', 'data/data.csv') 
 
     if not creds_json_str:
         print("Error: GOOGLE_SHEETS_API_CREDENTIALS secret not set.")
