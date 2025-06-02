@@ -32,7 +32,7 @@ jobs:
         GOOGLE_SHEET_ID: "18_qWTqGmvKum2P2l3UZy9lA9zxqMhJA5dT2Drq-e9hc" # 
       
         GOOGLE_SHEET_NAME: "Sheet1" 
-        OUTPUT_CSV_PATH: "data/your_data.csv" 
+        OUTPUT_CSV_PATH: "data/data.csv" 
       run: python fetch_sheet_data.py
 
     - name: Configure Git
