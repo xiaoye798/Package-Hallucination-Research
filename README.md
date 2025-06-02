@@ -46,32 +46,28 @@ The repository is organized to provide clarity and ease of access to different c
 
 ```
 Hallucination-Package-Research/
+├──.github/workflows/
+│   ├── sync_sheet.yml            # GitHub Action for Google Sheet data export and commit
+├──data/
+├── docs/                         # n8n workflow screenshot
+│   ├── agent.png
+│   ├── preemption_module.png
+│   └── detection_module.png
 ├── n8n-workflows/                # Contains n8n workflow JSON files
 │   ├── agent.json
 │   ├── detection_module.json
 │   ├── preemption_module.json
 │   └── warning_module.json
-├── scripts/                      # Supplementary scripts (e.g., Python, Shell)
-│   └── llm_interaction_logger.py
-├── config/                       # Example configuration files and templates
-│   └── .env.example
-├── docs/                         # Detailed documentation
-│   ├── deployment_guide.md
-│   └── architecture.md
-├── .gitignore
-├── LICENSE                       # Project's open-source license (e.g., MIT, Apache 2.0)
+├── fetch_sheet_data.py        # Fetching Google Sheet data to CSV
+
 └── README.md                     # This file: project overview and main entry point
 ```
 
 *   **`n8n-workflows/`**: Contains the exported JSON files for all n8n workflows that constitute the autonomous agent. These can be directly imported into an n8n instance.
-*   **`scripts/`**: Includes any auxiliary scripts used for tasks such as data collection (e.g., interacting with LLMs), data processing, or custom checks that might feed into the n8n workflows.
-*   **`config/`**: Provides example configuration files (e.g., `.env.example`) outlining necessary environment variables, API keys, or endpoint URLs required by the agent.
+*   **`fetch_sheet_data.py/`**: This script fetches data from a Google Sheet using API credentials and saves it to a CSV file in data folder.
 *   **`docs/`**: Houses more detailed documentation, including:
-    *   `deployment_guide.md`: Step-by-step instructions for setting up and deploying the agent.
     *   `architecture.md`: A deeper dive into the agent's architecture, data flow, and design decisions.
-    *   (Potentially other documents like research notes, experimental results, etc.)
-*   **`LICENSE`**: Contains the open-source license under which this project is distributed. (It is highly recommended to include a standard license like MIT or Apache 2.0).
-*   **`README.md`**: The primary guide for the repository, offering an overview, setup instructions, and links to further documentation.
+*   **`README.md`**: The primary guide for the repository, offering an overview and setup instructions.
 
 ## 4. Key Technologies Used
 
