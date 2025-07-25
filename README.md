@@ -46,8 +46,6 @@ The repository is organized to provide clarity and ease of access to different c
 
 ```
 Hallucination-Package-Research/
-├──.github/workflows/
-│   ├── sync_sheet.yml            # GitHub action for google sheet data export and commit
 ├──data/
 │   ├── data.csv                 # Hallucinated package list
 ├── docs/                         # The n8n workflow screenshot
@@ -59,11 +57,10 @@ Hallucination-Package-Research/
 │   ├── detection_module.json
 │   ├── preemption_module.json
 │   └── warning_module.json
-├── fetch_sheet_data.py        # Fetching google sheet data to csv
 └── README.md                     # Project overview
 ```
 
-*   **`data/data.csv`**: The hallucinated package list updated once an hour.
+*   **`data/data.csv`**: The hallucinated package list.
 *   **`docs/`**: Houses more detailed picture, including:
     *   `agent.png`: overall framework diagram of the  agent;
     *   `detextion_module.png`: framework diagram of detextion_module;
@@ -71,7 +68,6 @@ Hallucination-Package-Research/
 
 *   **`n8n-workflows/`**: Contains the exported JSON files for all n8n workflows that constitute the autonomous agent. These can be directly imported into an n8n instance.
 *   **`README.md`**: The primary guide for the repository, offering an overview and setup instructions.
-*   **`fetch_sheet_data.py/`**: This script fetches data from a Google Sheet using API credentials and saves it to a CSV file in data folder.
 *   
 ## 4. Key Technologies Used
 
