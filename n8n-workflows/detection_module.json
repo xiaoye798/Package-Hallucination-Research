@@ -206,7 +206,7 @@
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "工作表1",
+          "cachedResultName": "Table 1",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SDAkh7qc6bjNGlKD3hJewynWB-8_7z0LnVHIKEepqZI/edit#gid=0"
         },
         "columns": {
@@ -281,7 +281,7 @@
         -40
       ],
       "id": "a155f93e-87d4-4c28-bdb7-f3fc4d857d00",
-      "name": "提取npm install"
+      "name": "npm install"
     },
     {
       "parameters": {
