@@ -1,4 +1,4 @@
-# Package Hallucinations as Phantoms in Open-source Software Supply Chains: An Empirical Security Analysis - Technical Implementation Details
+# Technical Implementation Details
 
 ## NPM Large-Scale Hallucinated Package Detection Experimental Dataset
 
