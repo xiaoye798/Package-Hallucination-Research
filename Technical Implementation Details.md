@@ -166,8 +166,7 @@ Each IP was classified into one of four categories:
 - **Weak User Signal**: IPs with some indicators of human activity but insufficient for definitive classification
 - **Weak Script Signal**: IPs with some indicators of automated activity but not conclusive
 
-### Validation
-Disagreements among annotators were resolved through discussion to finalize the ground truth. To further ground our labels, the expert classifications were cross-referenced with data from **ThreatBook**, a leading commercial IP intelligence service. This process confirmed our categorization for over **95%** of the annotated samples.
+
 
 ## LLM Interaction and Package Extraction
 
