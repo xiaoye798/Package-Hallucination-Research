@@ -10,6 +10,31 @@ This directory contains experimental datasets for NPM package hallucination dete
 
 By leveraging the extensive knowledge base of **Stack Overflow**, the famous online Q&A service for software programmers, we have collected a substantial dataset of over **10,000 JavaScript-related questions** distributed across two main files:
 
+### Dataset Files
+
+#### 1. First Dataset (`1_question.json`)
+- **Total Questions**: 5,420 questions
+- **Data Structure**: JSON object with numeric IDs as keys and objects containing "Title" and "Body" fields as values
+
+#### 2. Second Dataset (`2_question.json`)
+- **Total Questions**: 5,473 questions
+- **Data Structure**: Same as the first dataset, JSON object format
+
+## Data Format Example
+
+```json
+{
+    "1": {
+        "Title": "How can I remove a specific item from an array in JavaScript?",
+        "Body": "How do I remove a specific value from an array? Something like:\narray.remove(value);\n\nConstraints: I have to use core JavaScript. Frameworks are not allowed."
+    },
+    "2": {
+        "Title": "How do I check if an element is hidden in jQuery?",
+        "Body": "How do I toggle the visibility of an element using .hide(), .show(), or .toggle()?\nHow do I test if an element is visible or hidden?"
+    }
+}
+```
+
 #### Data Collection Process
 
 The dataset construction follows a systematic approach:
