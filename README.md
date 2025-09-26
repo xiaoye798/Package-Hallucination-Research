@@ -48,8 +48,8 @@ The repository is organized to provide clarity and ease of access to different c
 Hallucination-Package-Research/
 ├──data/
 │   ├── data.csv                 # Hallucinated package list
-│   ├── 1_question.json                 # Prompt Dataset
-│   ├── 2_question.json                 # Prompt Dataset
+│   ├── 1_question.json                 # Subset of Prompt Dataset
+│   ├── 2_question.json                 # Subset of Prompt Dataset
 ├── docs/                         # The n8n workflow screenshot
 │   ├── agent.png
 │   ├── preemption_module.png
@@ -64,6 +64,8 @@ Hallucination-Package-Research/
 ```
 
 *   **`data/data.csv`**: The hallucinated package list.
+*   **`1_question.json`**: Subset of Prompt Dataset.
+*   **`2_question.json`**: Subset of Prompt Dataset.
 *   **`docs/`**: Houses more detailed picture, including:
     *   `agent.png`: overall framework diagram of the  agent;
     *   `detextion_module.png`: framework diagram of detextion_module;
