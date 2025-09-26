@@ -58,6 +58,7 @@ Hallucination-Package-Research/
 │   ├── preemption_module.json
 │   └── warning_module.json
 └── README.md                     # Project overview
+└── Technical Implementation Details # Paper Details
 ```
 
 *   **`data/data.csv`**: The hallucinated package list.
@@ -68,7 +69,7 @@ Hallucination-Package-Research/
 
 *   **`n8n-workflows/`**: Contains the exported JSON files for all n8n workflows that constitute the autonomous agent. These can be directly imported into an n8n instance.
 *   **`README.md`**: The primary guide for the repository, offering an overview and setup instructions.
-*   
+*   **`Technical Implementation Details.md`**: The technical details of experiments in paper.
 ## 4. Key Technologies Used
 
 *   **n8n.io:** Core platform for workflow automation and agent orchestration.
