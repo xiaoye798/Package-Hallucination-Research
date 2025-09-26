@@ -10,16 +10,6 @@ This directory contains experimental datasets for NPM package hallucination dete
 
 By leveraging the extensive knowledge base of **Stack Overflow**, the famous online Q&A service for software programmers, we have collected a substantial dataset of over **10,000 JavaScript-related questions** distributed across two main files:
 
-### Dataset Files
-
-#### 1. First Dataset (`1_question.json`)
-- **Total Questions**: 5,420 questions
-- **Data Structure**: JSON object with numeric IDs as keys and objects containing "Title" and "Body" fields as values
-
-#### 2. Second Dataset (`2_question.json`)
-- **Total Questions**: 5,473 questions
-- **Data Structure**: Same as the first dataset, JSON object format
-
 #### Data Collection Process
 
 The dataset construction follows a systematic approach:
@@ -31,11 +21,6 @@ The dataset construction follows a systematic approach:
 3. **No Pre-filtering**: Questions are gathered without any content-based filtering or quality screening to maintain the raw, authentic nature of developer inquiries. This includes questions with varying levels of clarity, completeness, and technical accuracy to mirror real-world developer interactions.
 
 4. **Diversity Assurance**: This unfiltered approach ensures the dataset captures the full spectrum of JavaScript-related queries, from basic syntax questions to complex implementation challenges. The dataset includes questions across different JavaScript frameworks (React, Vue, Angular), runtime environments (Node.js, browser), and application domains (web development, mobile apps, server-side applications).
-
-5. **Temporal Distribution**: Questions span multiple years to capture the evolution of JavaScript practices and emerging technologies, ensuring the dataset reflects both established patterns and current trends in the JavaScript ecosystem.
-
-6. **Metadata Preservation**: Each question retains its original metadata including tags, vote counts, answer counts, and timestamps to enable comprehensive analysis of question characteristics and their correlation with LLM responses.
-
 ---
 
 # Performance Metrics for the LightGBM IP Classifier
@@ -94,78 +79,6 @@ A detailed annotation guide was established beforehand to ensure consistency in 
 | **Special Case Handling** | VPN/Proxy Usage | Accompanied by demonstrable user-like behavioral patterns/ Lacks demonstrable user-like behavioral patterns; activity appears automated |
 | | Cloud Service User Behavior | IP originates from a cloud service, but exhibits clear, strong user-like behaviors/ no user behavior, and current cumulative score is less than 5 |
 
-#### Static Attributes
-
-These are inherent characteristics of the IP address that remain relatively constant:
-
-- **IP Reputation**: IPs that are officially marked as malicious in threat intelligence databases
-- **Threat Type**: IPs associated with threat intelligence that indicates specific malicious keywords or activities
-- **Network Context**: IPs identified as originating from either a server environment or an end-user environment
-- **Cloud Services**: IPs attributed to Cloud Service Providers with evidence suggesting non-individual user activity
-- **ISP Type**: IPs attributed to conventional Internet Service Providers
-- **Benign Status**: IPs with no known malicious markers and no identified threat types
-
-#### Behavioral Characteristics
-
-These are dynamic patterns observed in the IP's activity:
-
-**Connection Patterns:**
-- Predominance of numerous, very short-duration connections
-- Connection durations that are exactly identical across multiple distinct sessions
-
-**Operating System:**
-- Server-grade OS identification (e.g., Linux Server variants, Windows Server)
-- Desktop-grade OS identification (e.g., Windows 10/11, macOS, common Linux desktops)
-
-**User Account Type:**
-- Service account usernames (e.g., "admin", "service", "system", "runner")
-- Personalized or non-generic usernames
-
-**Hostname Structure:**
-- Server naming conventions (e.g., 'srv-', 'db-', patterned names, cloud-instance IDs)
-- Personalized or non-generic hostnames
-
-**CPU Architecture:**
-- Server-grade CPU models (e.g., Xeon, EPYC)
-- Consumer-grade CPU models (e.g., Core i-series, Ryzen)
-
-**Display/GUI:**
-- Absence of graphical user interface (e.g., "N/A (Linux/No X)", no screen resolution)
-- Presence of common desktop display resolution
-
-**Session Interactivity:**
-- Evidence of interactive sessions (real-time command execution, user-driven events)
-- Evidence of non-interactive or scripted sessions (automated task execution)
-
-**Process Footprint:**
-- Presence of web browser processes
-- Absence of web browser processes
-- Presence of office productivity software processes (e.g., Microsoft Office suite)
-
-**Additional Indicators:**
-- Process Enumeration: Failure to retrieve or access process information
-- System Uptime: Exceptionally long system uptime (continuously operational for >30 days)
-- Feature Aggregation (Server): ≥3 distinct behavioral characteristics indicative of server environment
-- Feature Aggregation (Desktop): ≥3 distinct behavioral characteristics indicative of desktop/user environment
-
-#### Special Case Handling
-
-**VPN/Proxy Usage:**
-- IPs with demonstrable user-like behavioral patterns despite proxy usage
-- IPs lacking demonstrable user-like behavioral patterns with automated activity appearance
-
-**Cloud Service User Behavior:**
-- Cloud-originated IPs exhibiting clear, strong user-like behaviors
-- Cloud-originated IPs with no user behavior and cumulative score less than 5
-
-### Classification Categories
-
-Each IP was classified into one of four categories:
-- **Real User**: IPs with strong evidence of human developer activity
-- **Automated Script**: IPs with clear signs of automated behavior (e.g., crawlers, bots)
-- **Weak User Signal**: IPs with some indicators of human activity but insufficient for definitive classification
-- **Weak Script Signal**: IPs with some indicators of automated activity but not conclusive
-
 
 
 ## LLM Interaction and Package Extraction
@@ -211,15 +124,3 @@ The following table presents the mean performance metrics and their standard dev
 - **Support**: The number of actual occurrences of the class in the dataset.
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
