@@ -27,9 +27,29 @@ The dataset construction follows a systematic approach:
 
 This document details the performance of our LightGBM classifier, designed to distinguish real developer IP addresses from automated scripts based on access patterns and other features.
 
-## Methodology
+## Classification Report
 
-To rigorously evaluate the classifier, we established a ground truth corpus and validated it through a multi-step process:
+The following table presents the mean performance metrics and their standard deviations across all folds:
+
+### Table: IP Classifier Performance (10-Fold Cross-Validation)
+
+| **Metric** | **Mean** | **Standard Deviation** |
+|------------|----------|------------------------|
+| Accuracy | 0.950 | 0.051 |
+| Weighted Precision | 0.962 | 0.045 |
+| Weighted Recall | 0.950 | 0.051 |
+| Weighted F1-Score | 0.955 | 0.048 |
+
+### Metrics Explanation
+
+- **Precision**: Measures the accuracy of positive predictions. For example, a precision of 1.000 for Real User means every IP the model classified as a Real User was correct.
+- **Recall**: Measures the model's ability to identify all relevant instances of a class. For example, a recall of 1.000 for Real User means the model successfully identified every true Real User in the dataset.
+- **F1-Score**: The harmonic mean of precision and recall, providing a single metric that balances both.
+- **Support**: The number of actual occurrences of the class in the dataset.
+
+# IP Address Classification Guidelines
+
+A detailed annotation guide was established beforehand to ensure consistency in the classification process.
 
 ### Annotation
 A sample of **100 IPs** was manually annotated by experts. A detailed annotation guide was established beforehand to ensure consistency.
@@ -41,9 +61,7 @@ Each IP was classified into one of four categories:
 - **Weak User Signal**: IPs with some indicators of human activity but insufficient for a definitive classification.
 - **Weak Script Signal**: IPs with some indicators of automated activity but not conclusive.
 
-### IP Address Classification Guidelines
-
-A detailed annotation guide was established beforehand to ensure consistency in the classification process. The classification criteria are organized into three main categories as shown in the following table:
+ The classification criteria are organized into three main categories as shown in the following table:
 
 #### Table: IP Address Classification Rule
 
@@ -103,24 +121,5 @@ First, we query selected LLMs that contain a specific system message with prompt
 
 The `npm install` command are searched in the generated JavaScript code through regular expression and get package names. The final step involves querying package names against the npm registry. A package is subsequently classified as hallucinated if the registry lookup confirms its nonexistence.
 
-## Classification Report
-
-The following table presents the mean performance metrics and their standard deviations across all folds:
-
-### Table: IP Classifier Performance (10-Fold Cross-Validation)
-
-| **Metric** | **Mean** | **Standard Deviation** |
-|------------|----------|------------------------|
-| Accuracy | 0.950 | 0.051 |
-| Weighted Precision | 0.962 | 0.045 |
-| Weighted Recall | 0.950 | 0.051 |
-| Weighted F1-Score | 0.955 | 0.048 |
-
-### Metrics Explanation
-
-- **Precision**: Measures the accuracy of positive predictions. For example, a precision of 1.000 for Real User means every IP the model classified as a Real User was correct.
-- **Recall**: Measures the model's ability to identify all relevant instances of a class. For example, a recall of 1.000 for Real User means the model successfully identified every true Real User in the dataset.
-- **F1-Score**: The harmonic mean of precision and recall, providing a single metric that balances both.
-- **Support**: The number of actual occurrences of the class in the dataset.
 
 ---
