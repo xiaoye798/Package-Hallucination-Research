@@ -160,7 +160,6 @@ This section analyzes the economic costs of conducting large-scale package hallu
 - **Coverage**: Multiple mainstream LLM provider API services
 
 ### Detailed Cost Analysis
-> **Note**: Detailed cost breakdown and allocation strategies are being updated, which will include:
-
+> **Note**: Detailed cost breakdown and allocation strategies are being updated.
 
 ---
