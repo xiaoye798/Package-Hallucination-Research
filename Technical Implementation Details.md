@@ -146,5 +146,21 @@ First, we query selected LLMs that contain a specific system message with prompt
 
 The `npm install` command are searched in the generated JavaScript code through regular expression and get package names. The final step involves querying package names against the npm registry. A package is subsequently classified as hallucinated if the registry lookup confirms its nonexistence.
 
+# Attack Cost Analysis
+
+## Overview
+
+This section analyzes the economic costs of conducting large-scale package hallucination attacks using commercial LLMs. Through detailed cost breakdown, we evaluate the economic barriers.
+
+## Overall Cost Structure
+
+### Total Experimental Cost
+- **Total Budget**: $1,109 USD
+- **Cost Type**: API call fees
+- **Coverage**: Multiple mainstream LLM provider API services
+
+### Detailed Cost Analysis
+> **Note**: Detailed cost breakdown and allocation strategies are being updated, which will include:
+
 
 ---
